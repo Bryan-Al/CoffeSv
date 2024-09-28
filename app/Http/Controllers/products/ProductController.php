@@ -18,7 +18,11 @@ class ProductController extends Controller
         ->orderBy('id', 'desc')
         ->get();
 
-        return view ('products.productSingle', compact('products', 'related_products'));
+        $chekingcart = Cart::where('pro_id',$id)
+        ->where('user_id', Auth::user()->id)
+        ->count(); 
+
+        return view ('products.productSingle', compact('products', 'related_products','chekingcart'));
     }
 
     public function addCart (Request $request,$id) {
@@ -32,6 +36,6 @@ class ProductController extends Controller
 
         ]);
 
-        return redirect()->route('product.single', $id)->with(['success' => 'product_added']);
+        return redirect()->route('product.single', $id)->with(['success' => 'Producto agregado correctamente']);
     }
 }

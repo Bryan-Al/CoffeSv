@@ -17,9 +17,12 @@
       </div>
     </div>
   </section>
-  @if( Session::has( 'success' ))
-     {{ Session::get( 'success' ) }}
+  <div class="container">
+    @if( Session::has( 'success' ))
+    <p class="alert {{Session::get('alert-class','alert-info')}} text-center" >{{ Session::get( 'success' ) }}</p>
 @endif
+  </div>
+ 
 
   <section class="ftco-section">
       <div class="container">
@@ -41,13 +44,17 @@
             </div>
             <form method="POST" action="{{route('add.single', $products->id)}}" >
               @csrf
-              <input type="text" name="pro_id" value="{{$products->id}}" >
-              <input type="text" name="name" value="{{$products->name}}" >
-              <input type="text" name="price" value="{{$products->price}}" >
-              <input type="text" name="image" value="{{$products->image}}" >
+              <input type="hidden" name="pro_id" value="{{$products->id}}" >
+              <input type="hidden" name="name" value="{{$products->name}}" >
+              <input type="hidden" name="price" value="{{$products->price}}" >
+              <input type="hidden" name="image" value="{{$products->image}}" >
             
-            
-            <p><button type="submit" name="submit" href="cart.html" class="btn btn-primary btn-outline-primary py-3 px-5">Add to Cart</button></p>
+            @if ($chekingcart == 0)
+            <button type="submit" name="submit" href="cart.html" class="btn btn-primary btn-outline-primary py-3 px-5">Add to Cart</button>
+            @else
+            <button style="background-color: black" type="submit" name="submit" href="cart.html" class="btn btn-warning btn-outline-primary py-3 px-5" disabled>Add to Cart</button>
+            @endif
+          
               </div>
           </div>
       </div>
