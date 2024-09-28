@@ -24,3 +24,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //productos 
 Route::get('products/product-single/{id}', [ProductController::class, 'SingleProduct'])->name('product.single');
+Route::post('products/product-single/{id}', [ProductController::class, 'addCart'])->name('add.single');

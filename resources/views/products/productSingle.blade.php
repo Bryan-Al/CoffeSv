@@ -17,6 +17,9 @@
       </div>
     </div>
   </section>
+  @if( Session::has( 'success' ))
+     {{ Session::get( 'success' ) }}
+@endif
 
   <section class="ftco-section">
       <div class="container">
@@ -36,7 +39,15 @@
                           </div>
                       
             </div>
-            <p><a href="cart.html" class="btn btn-primary py-3 px-5">Add to Cart</a></p>
+            <form method="POST" action="{{route('add.single', $products->id)}}" >
+              @csrf
+              <input type="text" name="pro_id" value="{{$products->id}}" >
+              <input type="text" name="name" value="{{$products->name}}" >
+              <input type="text" name="price" value="{{$products->price}}" >
+              <input type="text" name="image" value="{{$products->image}}" >
+            
+            
+            <p><button type="submit" name="submit" href="cart.html" class="btn btn-primary btn-outline-primary py-3 px-5">Add to Cart</button></p>
               </div>
           </div>
       </div>
